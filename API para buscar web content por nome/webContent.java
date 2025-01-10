@@ -39,18 +39,30 @@ public class EmailDinamiicRestServiceApplication extends Application {
         JSONObject object;
         object = JSONFactoryUtil.createJSONObject(payload);
 
+        if (object == null || object.length() == 0) {
+            _log.error(object);
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("{\"error\":\"Bad Request: JSON vázio ou inválido.\"}").build();
+        }
+
         try {
 
             long groupId = Long.parseLong(object.getString("groupId"));
             JournalArticle pontJornalArticle = null;
             String name = object.getString("name");
 
+            if (name.isEmpty() || groupId == 0){
+                _log.error(object);
+                return Response.status(Response.Status.BAD_REQUEST).entity("{\"error\":\"Bad Request: Estão vázios alguns dos campos (recordSetName, companyId, groupId, userId).\"}").build();
+            }
+
+            // Busca todos os artigos no grupo
             List<JournalArticle> articles = JournalArticleLocalServiceUtil.getArticles(groupId);
 
             // Itera sobre todos os artigos e filtra pelo título
             for (JournalArticle art : articles) {
 
-                if (art.getTitle().equalsIgnoreCase(name)) {
+                if (art.getTitle().equals(name)) {
                     pontJornalArticle = art;
                     break;
                 }
@@ -58,7 +70,7 @@ public class EmailDinamiicRestServiceApplication extends Application {
 
             if(pontJornalArticle == null){
                 return Response.status(Response.Status.NOT_FOUND)
-                        .entity("{\"error\":\"Not Found: Conteúdo web não foi encontrado.\"}").build();
+                        .entity("{\"error\":\"Not Found: Conteúdo web não encontrado.\"}").build();
             }
 
         }catch (Exception e){
