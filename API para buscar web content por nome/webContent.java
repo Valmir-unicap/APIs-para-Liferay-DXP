@@ -53,7 +53,7 @@ public class EmailDinamiicRestServiceApplication extends Application {
 
             if (name.isEmpty() || groupId == 0){
                 _log.error(object);
-                return Response.status(Response.Status.BAD_REQUEST).entity("{\"error\":\"Bad Request: Estão vázios alguns dos campos (recordSetName, companyId, groupId, userId).\"}").build();
+                return Response.status(Response.Status.BAD_REQUEST).entity("{\"error\":\"Bad Request: Estão vázios alguns dos campos (name, groupId).\"}").build();
             }
 
             // Busca todos os artigos no grupo
