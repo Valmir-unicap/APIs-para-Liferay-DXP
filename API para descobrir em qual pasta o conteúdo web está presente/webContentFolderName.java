@@ -91,6 +91,6 @@ public class webContentRestServiceApplication extends Application {
         return Response.ok(object.toString(), MediaType.APPLICATION_JSON).build();
     }
 
-    private final Log _log = LogFactoryUtil.getLog(EmailDinamiicRestServiceApplication.class);
+    private final Log _log = LogFactoryUtil.getLog(webContentRestServiceApplication.class);
 
 }
