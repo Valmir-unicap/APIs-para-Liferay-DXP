@@ -30,7 +30,7 @@ import java.util.Set;
         "liferay.access.control.disable=true"
 },
         service = Application.class)
-public class EmailDinamiicRestServiceApplication extends Application {    
+public class webContentDinamiicRestServiceApplication extends Application {    
 
     @POST
     @Path("/filtar-nome")
@@ -81,5 +81,5 @@ public class EmailDinamiicRestServiceApplication extends Application {
         return Response.ok(object.toString(), MediaType.APPLICATION_JSON).build();
    }
 
-   private final Log _log = LogFactoryUtil.getLog(EmailDinamiicRestServiceApplication.class);
+   private final Log _log = LogFactoryUtil.getLog(webContentDinamiicRestServiceApplication.class);
 }
