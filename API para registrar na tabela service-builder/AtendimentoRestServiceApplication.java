@@ -102,15 +102,18 @@ public class AtendimentoRestServiceApplication extends Application  {
 
             long id = CounterLocalServiceUtil.increment();
 
-            String atendente = object.getString("momeAtendente");
-            String categoriaDescricao = object.getString("categoriaDescricao");
+            String atendente = object.getString("nomeAtendente");
+            String descTabulacao = object.getString("descTabulacao");
             String dataRegistroStr = object.getString("dataRegistro");
-            String idCategoria = object.getString("idCategoria");
+            String idTabulacao = object.getString("idTabulacao");
             String numeroChamado = object.getString("numeroChamado");
+            String idUltimaTabulacao = object.getString("idUltimaTabulacao");
+            String descUltimaTabulacao = object.getString("descUltimaTabulacao");
 
-            if(atendente==null || categoriaDescricao==null || dataRegistroStr==null || idCategoria==null || numeroChamado==null){
+            if(atendente==null || descTabulacao==null || dataRegistroStr==null || idTabulacao==null ||
+                    numeroChamado==null || idUltimaTabulacao == null || descUltimaTabulacao==null){
                 return Response.status(Response.Status.BAD_REQUEST)
-                        .entity("{\"erro\":\"Json vázio! Atribuia valor para os campos").build();
+                        .entity("{\"erro\":\"Um ou mais campos obrigatórios estão ausentes ou nulos no JSON.").build();
             }
 
             Atendimento atendimento = AtendimentoLocalServiceUtil.createAtendimento(id);
@@ -121,12 +124,14 @@ public class AtendimentoRestServiceApplication extends Application  {
                                 "Verifique se o serviço está corretamente implementado.\"}").build();
             }
 
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             Date dataRegistro = formatter.parse(dataRegistroStr);
 
-            atendimento.setCategoriaDescricao(categoriaDescricao);
             atendimento.setDataRegistro(dataRegistro);
-            atendimento.setIdCategoria(idCategoria);
+            atendimento.setDescTabulacao(descTabulacao);
+            atendimento.setDescUltimaTabulacao(descUltimaTabulacao);
+            atendimento.setIdTabulacao(idTabulacao);
+            atendimento.setIdUltimaTabulacao(idUltimaTabulacao);
             atendimento.setNomeAtendente(atendente);
             atendimento.setNumeroChamado(numeroChamado);
 
