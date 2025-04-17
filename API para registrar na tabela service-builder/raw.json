@@ -1,7 +1,9 @@
 {
-  "idCategoria": "12345",
+  "idTabulacao": "12345",
   "numeroChamado": "CHAM123",
   "nomeAtendente": "Harry",
-  "categoriaDescricao": "Suporte técnico"
-  "dataRegistro":"2025-04-15T21:45:00"
+  "descTabulacao": "RH",
+  "idUltimaTabulacao":"6789",
+  "descUltimaTabulacao":"Juridico",
+  "dataRegistro":"2025-04-15"
 }
